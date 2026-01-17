@@ -1,5 +1,6 @@
 
 using templatebase.src.auth.Dtos;
+using templatebase.src.Infraestructure.Adapters.In.Dto;
 using templatebase.src.User.Infraestructure.Adapters.Out.Entities;
 
 namespace templatebase.src.Domain.Ports.Out
@@ -9,7 +10,7 @@ namespace templatebase.src.Domain.Ports.Out
         Task<ICollection<UserEntity>> FindAll();
         Task<UserEntity> FindById(string id);
         Task<bool> IsUniqueUser(string username);
-        Task<UserLoginResponseDTO> Login(UserLoginDTO dto);
-        Task<UserDataDTO> Register(UserRegisterDTO dto);
+        Task<UserLoginResponse> Login(UserLoginRequest dto);
+        Task<UserResponse> Register(UserRegisterRequest dto);
     }
 }

@@ -1,0 +1,11 @@
+En caso de que se requiera mappear de datos que no coinciden con el nombre.
+CreateMap<UserEntity, UserResponse>()
+    .ForMember(dest => dest.Name,
+               opt => opt.MapFrom(src => src.UserName));
+
+//Ignorar campos
+.ForMember(d => d.Password, o => o.Ignore())
+
+//Mappear una lista
+var result = _mapper.Map<List<UserResponse>>(users);
+

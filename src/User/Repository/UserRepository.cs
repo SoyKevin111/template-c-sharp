@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using templatebase.src.auth.Dtos;
 using templatebase.src.Domain.Ports.Out;
+using templatebase.src.Infraestructure.Adapters.In.Dto;
 using templatebase.src.User.Infraestructure.Adapters.Out.Entities;
 
 namespace templatebase.src.Infraestructure.Adapters.Out.Respositories
@@ -49,17 +50,17 @@ namespace templatebase.src.Infraestructure.Adapters.Out.Respositories
             return userDB == null;
         }
 
-        public async Task<UserLoginResponseDTO> Login(UserLoginDTO dto)
+        public async Task<UserLoginResponse> Login(UserLoginRequest dto)
         {
             var user = await _userManager.FindByNameAsync(dto.Username);
-            if (user == null) return new UserLoginResponseDTO() { Token = "", User = null };
+            if (user == null) return new UserLoginResponse() { Token = "", User = null };
 
             bool isValid = await _userManager.CheckPasswordAsync(user, dto.Password);
-            if (!isValid) return new UserLoginResponseDTO() { Token = "", User = null };
+            if (!isValid) return new UserLoginResponse() { Token = "", User = null };
 
             //! user no exists
             if (user == null || isValid == false)
-                return new UserLoginResponseDTO()
+                return new UserLoginResponse()
                 {
                     Token = "",
                     User = null
@@ -83,17 +84,17 @@ namespace templatebase.src.Infraestructure.Adapters.Out.Respositories
             };
 
             var token = manageToken.CreateToken(tokenDescriptor);
-            UserLoginResponseDTO userLoginResponseDTO = new()
+            UserLoginResponse userLoginResponse = new()
             {
                 Token = manageToken.WriteToken(token),
-                User = _mapper.Map<UserDataDTO>(user),
+                User = _mapper.Map<UserResponse>(user),
                 Role = roles.FirstOrDefault()
             };
 
-            return userLoginResponseDTO;
+            return userLoginResponse;
         }
 
-        public async Task<UserDataDTO> Register(UserRegisterDTO dto)
+        public async Task<UserResponse> Register(UserRegisterRequest dto)
         {
             UserEntity user = new()
             {
@@ -119,10 +120,10 @@ namespace templatebase.src.Infraestructure.Adapters.Out.Respositories
                 var userResult = await _db.User
                     .FirstOrDefaultAsync(u => u.UserName == dto.Username);
 
-                return _mapper.Map<UserDataDTO>(userResult);
+                return _mapper.Map<UserResponse>(userResult);
             }
 
-            return new UserDataDTO();
+            return new UserResponse();
         }
     }
 

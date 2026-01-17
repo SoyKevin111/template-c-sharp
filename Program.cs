@@ -40,7 +40,7 @@ builder.Services.AddControllers(option =>
 });
 
 //AUTOMAPPER
-builder.Services.AddAutoMapper(cfg => { }, typeof(MapperAPI));
+builder.Services.AddAutoMapper(cfg => { }, typeof(EntityMapper));
 
 
 // AUTH WITH JWT

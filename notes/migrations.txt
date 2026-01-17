@@ -1,0 +1,45 @@
+
+dependencias:
+dotnet add package Microsoft.EntityFrameworkCore --version 10.0.0 // EF
+dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 10.0.0 //simula base de datos en memoria
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 10.0.0 //motor sql server
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 10.0.0 //postgresql
+
+
+//configuracion para poder usar 'add' en los paquetes de nuget org:
+dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
+dotnet nuget list source  
+dotnet nuget locals all --clear
+
+
+
+Fluent API (de EF)
+- trata atributos avanzados
+- definir y tratar tablas, propiedaes, etc en codigo c#
+- funciones
+
+
+// FK sin navegación
+task.HasOne<Category>()
+    .WithMany()
+    .HasForeignKey(t => t.CategoryId);
+
+
+Migraciones
+- guarda de manera incremental cambios hechos en DB
+- versionamiento DB
+- permite gestionar los nuevos cambios en base de datos mendiante la cli de ef,
+que permite hacer un seguimiento de los nuevos registros, dropearlo, etc.
+- instalar tools en cli dotnet (dotnet ef tools)
+- trazabilidad de los cambios
+
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 10.0.0
+
+comandos basicos:
+instalar: dotnet tool install --global dotnet-ef
+_______________________________________
+dotnet ef migrations add NuevoCambio
+dotnet ef database update
+_______________________________________
+dotnet ef migrations add MyMigration
+

@@ -5,11 +5,11 @@ using templatebase.src.User.Infraestructure.Adapters.Out.Entities;
 
 namespace templatebase.src.Common
 {
-    public class MapperAPI : Profile
+    public class EntityMapper : Profile
     {
-        public MapperAPI()
+        public EntityMapper()
         {
-            CreateMap<UserEntity, UserDataDTO>().ReverseMap();
+            CreateMap<UserEntity, UserResponse>().ReverseMap();
         }
     }
 }

@@ -32,14 +32,7 @@ namespace templatebase.src.Infraestructure.Adapters.In.Rest
         public async Task<IActionResult> GetUsers()
         {
             var users = await _uRepo.FindAll();
-
-            var userDto = new List<UserDTO>();
-            foreach (var u in users)
-            {
-                userDto.Add(_mapper.Map<UserDTO>(u));
-            }
-
-            return Ok(userDto);
+            return Ok(_mapper.Map<List<UserResponse>>(users));
         }
 
         [Authorize(Roles = "Admin")]
@@ -54,9 +47,7 @@ namespace templatebase.src.Infraestructure.Adapters.In.Rest
             {
                 return NotFound();
             }
-
-            var userDto = _mapper.Map<UserDTO>(user);
-            return Ok(userDto);
+            return Ok(_mapper.Map<UserResponse>(user));
         }
 
         [AllowAnonymous]
@@ -65,7 +56,7 @@ namespace templatebase.src.Infraestructure.Adapters.In.Rest
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Register([FromBody] UserRegisterDTO registerDTO)
+        public async Task<IActionResult> Register([FromBody] UserRegisterRequest registerDTO)
         {
             bool isUniqueUser = await _uRepo.IsUniqueUser(registerDTO.Username);
             if (!isUniqueUser)
@@ -96,7 +87,7 @@ namespace templatebase.src.Infraestructure.Adapters.In.Rest
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Login([FromBody] UserLoginDTO loginDTO)
+        public async Task<IActionResult> Login([FromBody] UserLoginRequest loginDTO)
         {
             var loginResponse = await _uRepo.Login(loginDTO);
 
