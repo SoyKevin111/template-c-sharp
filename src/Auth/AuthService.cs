@@ -1,13 +1,15 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Authentication;
 using System.Security.Claims;
 using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using templatebase.src.auth.Dtos;
+using templatebase.src.Common.Exception;
 using templatebase.src.Domain.Ports.Out;
-using templatebase.src.Infraestructure.Adapters.In.Dto;
-using templatebase.src.User.Infraestructure.Adapters.Out.Entities;
+using templatebase.src.User.Entity;
+using templatebase.src.User.Response;
 
 namespace templatebase.src.Auth
 {
@@ -39,7 +41,7 @@ namespace templatebase.src.Auth
 
             var user = await _userManager.FindByNameAsync(username);
             if (user == null || !await _userManager.CheckPasswordAsync(user, dto.Password))
-                throw new UnauthorizedAccessException("Credenciales inválidas");
+                throw new AuthenticationException();
 
             var roles = await _userManager.GetRolesAsync(user);
             var role = roles.FirstOrDefault() ?? "User";
@@ -57,7 +59,7 @@ namespace templatebase.src.Auth
             var username = dto.Username.Trim();
 
             if (!await _repo.IsUniqueUser(username))
-                throw new InvalidOperationException("El usuario ya existe");
+                throw new ConflictException("El usuario ya existe");
 
             var user = new UserEntity
             {
@@ -70,10 +72,7 @@ namespace templatebase.src.Auth
 
             var result = await _userManager.CreateAsync(user, dto.Password);
 
-            if (!result.Succeeded)
-                throw new InvalidOperationException(
-                    string.Join(", ", result.Errors.Select(e => e.Description))
-                );
+            if (!result.Succeeded) throw new BadRequestException("No se pudo registrar el usuario.");
 
             await EnsureUserRoleExists();
             await _userManager.AddToRoleAsync(user, "User");

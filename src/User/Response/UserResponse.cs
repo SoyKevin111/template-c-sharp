@@ -1,4 +1,4 @@
-namespace templatebase.src.Infraestructure.Adapters.In.Dto
+namespace templatebase.src.User.Response
 {
     public class UserResponse
     {

@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using templatebase;
 using templatebase.src.Auth;
 using templatebase.src.Common;
+using templatebase.src.Core;
 using templatebase.src.Domain.Ports.Out;
 using templatebase.src.Infraestructure.Adapters.Out.Respositories;
 using templatebase.src.User.Contract;
@@ -148,6 +149,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 //app.UseStaticFiles();
 

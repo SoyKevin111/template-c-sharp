@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace templatebase.src.User.Infraestructure.Adapters.Out.Entities
+namespace templatebase.src.User.Entity
 {
     public class UserEntity : IdentityUser
     {

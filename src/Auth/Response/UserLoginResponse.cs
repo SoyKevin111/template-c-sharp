@@ -1,5 +1,4 @@
-
-using templatebase.src.Infraestructure.Adapters.In.Dto;
+using templatebase.src.User.Response;
 
 namespace templatebase.src.auth.Dtos
 {

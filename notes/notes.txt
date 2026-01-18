@@ -68,3 +68,8 @@ USERS
 ROLES
 RELACION USER A ROLES
 ---------------------------------------------------------------------------------------
+
+
+- FluentValidation 
+- Excepciones personalizadas 
+- middleware global de excepciones

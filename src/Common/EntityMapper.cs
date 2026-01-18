@@ -1,7 +1,6 @@
 using AutoMapper;
-using templatebase.src.auth.Dtos;
-using templatebase.src.Infraestructure.Adapters.In.Dto;
-using templatebase.src.User.Infraestructure.Adapters.Out.Entities;
+using templatebase.src.User.Entity;
+using templatebase.src.User.Response;
 
 namespace templatebase.src.Common
 {

@@ -1,0 +1,57 @@
+Autenticación
+
+AuthenticationException → Credenciales inválidas → 401 Unauthorized
+
+UnauthorizedAccessException → Usuario autenticado sin permisos → 403 Forbidden
+
+SecurityException → Violación de seguridad → 403 Forbidden
+
+Autorización
+
+UnauthorizedAccessException → Acceso prohibido → 403 Forbidden
+
+SecurityException → Acceso no autorizado → 403 Forbidden
+
+JWT / Tokens
+
+SecurityTokenException → Token inválido → 401 Unauthorized
+
+SecurityTokenExpiredException → Token expirado → 401 Unauthorized
+
+SecurityTokenInvalidSignatureException → Firma inválida → 401 Unauthorized
+
+SecurityTokenInvalidAudienceException → Audiencia inválida → 401 Unauthorized
+
+SecurityTokenInvalidIssuerException → Emisor inválido → 401 Unauthorized
+
+SecurityTokenInvalidLifetimeException → Tiempo de vida inválido → 401 Unauthorized
+
+SecurityTokenNoExpirationException → Token sin expiración → 401 Unauthorized
+
+Validación / Entrada
+
+ValidationException → Datos inválidos → 400 Bad Request
+
+ArgumentException → Argumento incorrecto → 400 Bad Request
+
+ArgumentNullException → Argumento nulo → 400 Bad Request
+
+FormatException → Formato inválido → 400 Bad Request
+
+Estado / Negocio
+
+InvalidOperationException → Estado inválido → 409 Conflict
+
+NotSupportedException → Operación no permitida → 405 Method Not Allowed
+
+Infraestructura / Seguridad
+
+CryptographicException → Error criptográfico → 500 Internal Server Error
+
+TimeoutException → Tiempo de espera excedido → 504 Gateway Timeout
+
+HTTP / API
+
+BadHttpRequestException → Request mal formada → 400 Bad Request
+
+HttpRequestException → Error en request HTTP → 502 Bad Gateway
