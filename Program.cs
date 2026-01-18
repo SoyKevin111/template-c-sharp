@@ -7,10 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using templatebase;
+using templatebase.src.Auth;
 using templatebase.src.Common;
 using templatebase.src.Domain.Ports.Out;
 using templatebase.src.Infraestructure.Adapters.Out.Respositories;
+using templatebase.src.User.Contract;
 using templatebase.src.User.Infraestructure.Adapters.Out.Entities;
+using templatebase.src.User.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +33,8 @@ builder.Services.AddIdentity<UserEntity, IdentityRole>()
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 //SERVICES
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<AuthService>();
 
 //CONTROLLER AND CACHE
 builder.Services.AddControllers(option =>
