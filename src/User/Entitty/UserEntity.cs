@@ -6,5 +6,6 @@ namespace templatebase.src.User.Entity
     {
         public string Name { get; set; }
         public string CreatedAt { get; set; }
+        public string Role { get; set; }
     }
 }

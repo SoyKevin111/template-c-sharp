@@ -2,7 +2,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using templatebase.src.auth.Dtos;
+using templatebase.src.Auth.Request;
 
 namespace templatebase.src.Auth
 {

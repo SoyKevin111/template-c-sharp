@@ -1,4 +1,6 @@
-using templatebase.src.User.Infraestructure.Adapters.Out.Entities;
+
+
+using templatebase.src.User.Entity;
 
 namespace templatebase.src.User.Contract
 {

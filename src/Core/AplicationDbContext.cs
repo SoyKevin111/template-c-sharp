@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using templatebase.src.User.Infraestructure.Adapters.Out.Entities;
+using templatebase.src.User.Entity;
 using templatebase.src.User.Infraestructure.configuration;
 
-namespace templatebase
+namespace templatebase.src.Core
 {
     public class AplicationDbContext : IdentityDbContext<UserEntity>
     {

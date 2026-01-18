@@ -1,19 +1,16 @@
-using System.Text;
 using Asp.Versioning;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using templatebase;
 using templatebase.src.Auth;
 using templatebase.src.Common;
 using templatebase.src.Core;
-using templatebase.src.Domain.Ports.Out;
-using templatebase.src.Infraestructure.Adapters.Out.Respositories;
+using templatebase.src.Core.configuration;
 using templatebase.src.User.Contract;
-using templatebase.src.User.Infraestructure.Adapters.Out.Entities;
+using templatebase.src.User.Entity;
+using templatebase.src.User.Repository;
 using templatebase.src.User.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -48,31 +45,8 @@ builder.Services.AddControllers(option =>
 //AUTOMAPPER
 builder.Services.AddAutoMapper(cfg => { }, typeof(EntityMapper));
 
-
 // AUTH WITH JWT
-builder.Services.AddAuthentication(
-    x =>
-    {
-        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    }
-).AddJwtBearer(
-    x =>
-    {
-        x.RequireHttpsMetadata = false; //desactivado SSL
-        x.SaveToken = true;
-        x.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.ASCII.GetBytes(key)
-            ),
-            ValidateIssuer = false,
-            ValidateAudience = false
-        };
-    }
-);
-
+builder.Services.AddJwtAuthentication(builder.Configuration);
 
 // SWAGGER
 builder.Services.AddSwaggerGen(options =>

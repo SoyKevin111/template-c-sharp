@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Identity;
-using templatebase.src.Domain.Ports.Out;
 using templatebase.src.User.Contract;
-using templatebase.src.User.Infraestructure.Adapters.Out.Entities;
+using templatebase.src.User.Entity;
 
 namespace templatebase.src.User.Service
 {

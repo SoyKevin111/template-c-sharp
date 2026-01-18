@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace templatebase.src.auth.Dtos
+namespace templatebase.src.Auth.Request
 {
     public class UserLoginRequest
     {

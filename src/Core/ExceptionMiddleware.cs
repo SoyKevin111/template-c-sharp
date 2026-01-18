@@ -7,10 +7,7 @@ namespace templatebase.src.Core
     {
         private readonly RequestDelegate _next;
 
-        public ExceptionMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
+        public ExceptionMiddleware(RequestDelegate next) => _next = next;
 
         public async Task Invoke(HttpContext context)
         {
@@ -18,34 +15,25 @@ namespace templatebase.src.Core
             {
                 await _next(context);
             }
-            catch (AppException ex)
+            catch (AppException ex) when (!context.Response.HasStarted)
             {
-                if (!context.Response.HasStarted)
-                {
-                    context.Response.StatusCode = ex.StatusCode;
-                    context.Response.ContentType = "application/json";
-                    await context.Response.WriteAsJsonAsync(new { error = ex.Message });
-                }
+                await WriteJsonResponse(context, ex.StatusCode, ex.Message);
             }
-            catch (AuthenticationException)
+            catch (AuthenticationException) when (!context.Response.HasStarted)
             {
-                if (!context.Response.HasStarted)
-                {
-                    context.Response.StatusCode = 401;
-                    context.Response.ContentType = "application/json";
-                    await context.Response.WriteAsJsonAsync(new { error = "Credenciales inválidas" });
-                }
+                await WriteJsonResponse(context, 401, "Credenciales inválidas");
             }
-            catch (Exception)
+            catch (Exception) when (!context.Response.HasStarted)
             {
-                if (!context.Response.HasStarted)
-                {
-                    context.Response.StatusCode = 500;
-                    context.Response.ContentType = "application/json";
-
-                }
+                await WriteJsonResponse(context, 500, "Error interno en el servidor.");
             }
         }
-    }
 
+        private static Task WriteJsonResponse(HttpContext context, int statusCode, string message)
+        {
+            context.Response.StatusCode = statusCode;
+            context.Response.ContentType = "application/json";
+            return context.Response.WriteAsJsonAsync(new { error = message });
+        }
+    }
 }

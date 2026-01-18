@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using templatebase.src.Domain.Ports.Out;
-using templatebase.src.User.Infraestructure.Adapters.Out.Entities;
+using templatebase.src.Core;
+using templatebase.src.User.Contract;
+using templatebase.src.User.Entity;
 
-namespace templatebase.src.Infraestructure.Adapters.Out.Respositories
+namespace templatebase.src.User.Repository
 {
     public class UserRepository : IUserRepository
     {
@@ -40,7 +41,7 @@ namespace templatebase.src.Infraestructure.Adapters.Out.Respositories
         }
 
 
-        public async Task Add(UserEntity user)
+        private async Task Add(UserEntity user)
         {
             _db.User.Add(user);
             await _db.SaveChangesAsync();

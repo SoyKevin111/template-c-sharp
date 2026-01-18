@@ -55,3 +55,11 @@ HTTP / API
 BadHttpRequestException → Request mal formada → 400 Bad Request
 
 HttpRequestException → Error en request HTTP → 502 Bad Gateway
+
+
+
+
+
+401: El usuario no está autenticado. Por ejemplo, no envió token o es inválido.
+
+403: El usuario sí está autenticado, pero no tiene permiso para ese recurso (rol incorrecto).

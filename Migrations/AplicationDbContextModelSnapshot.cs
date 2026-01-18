@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using templatebase;
+using templatebase.src.Core;
 
 #nullable disable
 
@@ -154,7 +154,7 @@ namespace templatebase.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("templatebase.src.User.Infraestructure.Adapters.Out.Entities.UserEntity", b =>
+            modelBuilder.Entity("templatebase.src.User.Entity.UserEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -204,6 +204,9 @@ namespace templatebase.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Role")
+                        .HasColumnType("text");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
@@ -237,7 +240,7 @@ namespace templatebase.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("templatebase.src.User.Infraestructure.Adapters.Out.Entities.UserEntity", null)
+                    b.HasOne("templatebase.src.User.Entity.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -246,7 +249,7 @@ namespace templatebase.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("templatebase.src.User.Infraestructure.Adapters.Out.Entities.UserEntity", null)
+                    b.HasOne("templatebase.src.User.Entity.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -261,7 +264,7 @@ namespace templatebase.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("templatebase.src.User.Infraestructure.Adapters.Out.Entities.UserEntity", null)
+                    b.HasOne("templatebase.src.User.Entity.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -270,7 +273,7 @@ namespace templatebase.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("templatebase.src.User.Infraestructure.Adapters.Out.Entities.UserEntity", null)
+                    b.HasOne("templatebase.src.User.Entity.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

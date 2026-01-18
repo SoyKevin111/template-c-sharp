@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace templatebase.src.auth.Dtos
+namespace templatebase.src.Auth.Request
 {
     public class UserRegisterRequest
     {
@@ -10,6 +10,5 @@ namespace templatebase.src.auth.Dtos
         public string Name { get; set; }
         [Required(ErrorMessage = "Password obligatorio.")]
         public string Password { get; set; }
-        public string Role { get; set; }
     }
 }

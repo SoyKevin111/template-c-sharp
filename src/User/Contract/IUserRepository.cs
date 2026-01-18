@@ -1,6 +1,6 @@
-using templatebase.src.User.Infraestructure.Adapters.Out.Entities;
+using templatebase.src.User.Entity;
 
-namespace templatebase.src.Domain.Ports.Out
+namespace templatebase.src.User.Contract
 {
     public interface IUserRepository
     {
@@ -8,7 +8,5 @@ namespace templatebase.src.Domain.Ports.Out
         public Task<UserEntity> FindById(string id);
         public Task<bool> IsUniqueUser(string username);
         public Task<UserEntity> FindByUsername(string username);
-        //Task<UserLoginResponse> Login(UserLoginRequest dto);
-        //Task<UserResponse> Register(UserRegisterRequest dto);
     }
 }

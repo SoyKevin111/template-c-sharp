@@ -6,7 +6,7 @@ using templatebase.src.Common.Exception;
 using templatebase.src.User.Contract;
 using templatebase.src.User.Response;
 
-namespace templatebase.src.Infraestructure.Adapters.In.Rest
+namespace templatebase.src.User.Controller
 {
     [Route("api/user")]
     [ApiVersion("1.0")]
@@ -16,10 +16,10 @@ namespace templatebase.src.Infraestructure.Adapters.In.Rest
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public UserController(
-            IMapper mapper)
+        public UserController(IMapper mapper, IUserService userService)
         {
-            _mapper = mapper;
+            this._mapper = mapper;
+            this._userService = userService;
         }
 
         // USERS (ADMIN)
